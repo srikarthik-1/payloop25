@@ -37,6 +37,24 @@ const NoiseOverlay = () => (
     ></div>
 );
 
+// Input Field Component
+const InputField = ({ label, type = 'text', value, onChange, placeholder, children }: { label: string, type?: string, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, placeholder: string, children?: React.ReactNode }) => (
+    <div>
+        <label className="block text-xs text-brand-muted mb-2 uppercase tracking-wider">{label}</label>
+        <div className="relative">
+            <input
+                type={type}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
+                className="w-full bg-transparent border-b border-brand-border py-2 text-brand-text text-base outline-none focus:border-brand-accent transition-colors pr-8"
+                required
+            />
+            {children}
+        </div>
+    </div>
+);
+
 // Auth Page Component
 interface AuthPageProps {
     onLogin: (u: string, p: string) => boolean;
@@ -88,23 +106,6 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin, onRegister, onDevLogin }) 
             setRegError('Username already exists.');
         }
     };
-
-    const InputField = ({ label, type = 'text', value, onChange, placeholder, children }: { label: string, type?: string, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, placeholder: string, children?: React.ReactNode }) => (
-        <div>
-            <label className="block text-xs text-brand-muted mb-2 uppercase tracking-wider">{label}</label>
-            <div className="relative">
-                <input
-                    type={type}
-                    value={value}
-                    onChange={onChange}
-                    placeholder={placeholder}
-                    className="w-full bg-transparent border-b border-brand-border py-2 text-brand-text text-base outline-none focus:border-brand-accent transition-colors pr-8"
-                    required
-                />
-                {children}
-            </div>
-        </div>
-    );
     
     return (
         <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 bg-brand-bg">
